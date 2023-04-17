@@ -28,7 +28,7 @@ class AddPayPalGateway extends Migration
                 [
                     'provider_name'           => 'PayPal',
                     'provider_url'            => 'https://www.paypal.com',
-                    'is_on_site'              => 1,
+                    'is_on_site'              => 0,
                     'can_refund'              => 0,
                     'name'                    => 'PayPal',
                     'default'                 => 0,
