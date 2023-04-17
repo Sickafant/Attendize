@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/13 13:27:24 
+ Generated via "php artisan localization:missing" at 2018/04/13 13:27:24
 *************************************************************************/
 
 return array (
@@ -35,6 +35,8 @@ return array (
   'paypal_settings' => 'PayPal Settings',
   'paypal_signature' => 'PayPal signature',
   'paypal_username' => 'PayPal username',
+  'paypal_publishable_key' => 'PayPal publishable key',
+  'paypal_secret_key' => 'PayPal secret key',
   'save_account_details_submit' => 'Save account details',
   'save_payment_details_submit' => 'Save payment details',
   'secret_code' => 'Secret code',
