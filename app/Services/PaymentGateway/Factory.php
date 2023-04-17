@@ -54,6 +54,16 @@ class Factory
 
                 }
 
+            case PayPal::GATEWAY_NAME :
+                {
+
+                    $gateway = Omnipay::create($name);
+                    $gateway->initialize($paymentGatewayConfig);
+
+                    return new PayPal($gateway, $paymentGatewayConfig);
+
+                }
+
             default :
                 {
                     throw New \Exception('Invalid gateway specified');
