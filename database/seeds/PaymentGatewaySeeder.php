@@ -62,5 +62,20 @@ class PaymentGatewaySeeder extends Seeder
             );
         }
 
+        $paypal = DB::table('payment_gateways')->where('name', '=', 'PayPal')->first();
+        if ($paypal === null) {
+            DB::table('payment_gateways')->insert(
+                [
+                    'provider_name' => 'PayPal',
+                    'provider_url' => 'https://www.paypal.com',
+                    'is_on_site' => 0,
+                    'can_refund' => 0,
+                    'name' => 'PayPal',
+                    'default' => 0,
+                    'admin_blade_template' => 'ManageAccount.Partials.PayPal',
+                    'checkout_blade_template' => 'Public.ViewEvent.Partials.PaymentPayPal'
+                ]
+            );
+        }
     }
 }
