@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Services\PaymentGateway\Dummy;
+use Services\PaymentGateway\PayPal;
 use Services\PaymentGateway\Stripe;
 use Services\PaymentGateway\StripeSCA;
 use Utils;
