@@ -18,7 +18,7 @@ class Factory
     /**
      * @param $name
      * @param $paymentGatewayConfig
-     * @return Dummy|Stripe|StripeSCA
+     * @return Dummy|Stripe|StripeSCA|PayPal
      * @throws \Exception
      */
     public function create($name, $paymentGatewayConfig)
