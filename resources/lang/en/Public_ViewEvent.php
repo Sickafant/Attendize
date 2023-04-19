@@ -67,6 +67,7 @@ return [
     'pay_using_offline_methods'         => 'Pay using offline methods',
     'payment_information'               => 'Payment Information',
     'payment_instructions'              => 'Payment instructions',
+    'paypal_credit_or_debit_card'       => 'Credit or debit card',
     'presents'                          => 'presents',
     'price'                             => 'Price',
     'quantity_full'                     => 'Quantity',
