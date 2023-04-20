@@ -18,7 +18,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 {!! Form::label('paypal[testMode]', trans("ManageAccount.paypal_test_mode"), array('class'=>'control-label ')) !!}
-                {!! Form::text('paypal[testMode]', $account->getGatewayConfigVal(config('attendize.payment_gateway_paypal'), 'testMode'),[ 'class'=>'form-control'])  !!}
+                {!! Form::text('paypal[testMode]', $account->getGatewayConfigVal($payment_gateway['id'], 'testMode'),[ 'class'=>'form-control'])  !!}
             </div>
         </div>
     </div>
