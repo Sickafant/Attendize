@@ -32,6 +32,7 @@ class PayPal
             'description' => 'Order for customer: ' . $order_email,
             'receipt_email' => $order_email,
             'returnUrl' => $returnUrl,
+            'cancelUrl' => '',
             'confirm' => true
         ];
 
