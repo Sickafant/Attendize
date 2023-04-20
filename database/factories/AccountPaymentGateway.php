@@ -13,6 +13,9 @@ $factory->define(AccountPaymentGateway::class, function (Faker\Generator $faker)
         'config' => [
             'apiKey' => '',
             'publishableKey' => '',
+            'clientId' => '',
+            'secret' => '',
+            'testMode' => '',
         ],
     ];
 });
