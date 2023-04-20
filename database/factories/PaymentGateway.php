@@ -49,11 +49,11 @@ $factory->state(PaymentGateway::class, 'Stripe SCA', [
 ]);
 
 $factory->state(PaymentGateway::class, 'PayPal', [
-    'provider_name' => 'PayPal',
+    'provider_name' => 'PayPal_Rest',
     'provider_url' => 'https://www.paypal.com',
     'is_on_site' => 0,
     'can_refund' => 0,
-    'name' => 'PayPal',
+    'name' => 'PayPal_Rest',
     'default' => 0,
     'admin_blade_template' => 'ManageAccount.Partials.PayPal',
     'checkout_blade_template' => 'Public.ViewEvent.Partials.PaymentPayPal'

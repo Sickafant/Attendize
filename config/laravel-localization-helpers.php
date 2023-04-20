@@ -8,7 +8,7 @@ return [
     // Add in each gateway here
     'gateways' => [
         'paypal' => [
-            'driver'  => 'PayPal_Express',
+            'driver'  => 'PayPal_Rest',
             'options' => [
                 'solutionType'   => '',
                 'landingPage'    => '',
