@@ -25,7 +25,6 @@ class PayPal
             'amount' => $order_total,
             'currency' => $event->currency->code,
             'description' => 'Order for customer: ' . $order_email,
-            'token' => $this->options['paypalToken'],
             'receipt_email' => $order_email
         ];
 
