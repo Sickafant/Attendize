@@ -21,11 +21,18 @@ class PayPal
 
     private function createTransactionData($order_total, $order_email, $event)
     {
+        $returnUrl = route('showEventCheckoutPaymentReturn', [
+            'event_id' => $event->id,
+            'is_payment_successful' => 1,
+        ]);
+
         $this->transaction_data = [
             'amount' => $order_total,
             'currency' => $event->currency->code,
             'description' => 'Order for customer: ' . $order_email,
-            'receipt_email' => $order_email
+            'receipt_email' => $order_email,
+            'returnUrl' => $returnUrl,
+            'confirm' => true
         ];
 
         return $this->transaction_data;
