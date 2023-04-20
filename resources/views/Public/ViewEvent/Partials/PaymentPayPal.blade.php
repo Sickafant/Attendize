@@ -14,10 +14,10 @@
     <input class="btn btn-lg btn-success card-submit" style="width:100%;" type="submit" value="@lang("Public_ViewEvent.complete_payment")">
 
 </form>
-<script type="text/javascript" src="https://www.paypal.com/sdk/js?client-id=<?php echo $account_payment_gateway->config['publishableKey']; ?>&components=buttons&vault=true&intent=subscription"></script>
+<script type="text/javascript" src="https://www.paypal.com/sdk/js?client-id=<?php echo $account_payment_gateway->config['clientId']; ?>&components=buttons&vault=true&intent=subscription"></script>
 <script type="text/javascript">
 
-    var paypal = PayPal('<?php echo $account_payment_gateway->config['publishableKey']; ?>');
+    var paypal = PayPal('<?php echo $account_payment_gateway->config['clientId']; ?>');
     var elements = paypal.elements();
 
     var style = {
