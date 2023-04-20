@@ -5,7 +5,7 @@ namespace Services\PaymentGateway;
 class PayPal
 {
 
-    CONST GATEWAY_NAME = 'PayPal';
+    CONST GATEWAY_NAME = 'PayPal_Rest';
 
     private $transaction_data;
 
