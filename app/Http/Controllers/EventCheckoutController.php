@@ -414,18 +414,24 @@ class EventCheckoutController extends Controller
 
             $payment_gateway_config = $ticket_order['account_payment_gateway']->config + [
                                                     'testMode' => config('attendize.enable_test_payments')];
+            Log::info("Gateway config data == " . print_r($payment_gateway_config, true) . "\n");
+
 
             $payment_gateway_factory = new PaymentGatewayFactory();
             $gateway = $payment_gateway_factory->create($ticket_order['payment_gateway']->name, $payment_gateway_config);
             //certain payment gateways require an extra parameter here and there so this method takes care of that
             //and sets certain options for the gateway that can be used when the transaction is started
             $gateway->extractRequestParameters($request);
+            Log::info("Gateway data == " . print_r($gateway, true) . "\n");
+
 
             //generic data that is needed for most orders
             $order_total = $order_service->getGrandTotal();
             $order_email = $ticket_order['request_data'][0]['order_email'];
 
             $response = $gateway->startTransaction($order_total, $order_email, $event);
+            Log::info("transaction response data == " . print_r($response, true) . "\n");
+
 
             if ($response->isSuccessful()) {
 
@@ -497,8 +503,13 @@ class EventCheckoutController extends Controller
 
         $ticket_order = session()->get('ticket_order_' . $event_id);
 
+        Log::info("showEventCheckoutPaymentReturn: ticket order data == " . print_r($ticket_order, true) . "\n");
+
         $payment_gateway_config = $ticket_order['account_payment_gateway']->config + [
                 'testMode' => config('attendize.enable_test_payments')];
+
+        Log::info("showEventCheckoutPaymentReturn: Gateway config data == " . print_r($payment_gateway_config, true) . "\n");
+
 
         $payment_gateway_factory = new PaymentGatewayFactory();
         $gateway = $payment_gateway_factory->create($ticket_order['payment_gateway']->name, $payment_gateway_config);
