@@ -71,15 +71,7 @@ class PayPal
     }
 
     public function completeTransaction($data) {
-        if (array_key_exists('payment_intent', $data)) {
-            $intentData = [
-                'paymentIntentReference' => $data['payment_intent'],
-            ];
-        } else {
-            $intentData = [
-                'paymentIntentReference' => $this->options['payment_intent'],
-            ];
-        }
+
         if ($response->isRedirect()) {
 
             session()->push('ticket_order_' . $event_id . '.transaction_data',
