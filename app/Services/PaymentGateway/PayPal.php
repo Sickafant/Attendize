@@ -70,13 +70,41 @@ class PayPal
         }
     }
 
-    public function completeTransaction($data) {}
+    public function completeTransaction($data) {
+        if (array_key_exists('payment_intent', $data)) {
+            $intentData = [
+                'paymentIntentReference' => $data['payment_intent'],
+            ];
+        } else {
+            $intentData = [
+                'paymentIntentReference' => $this->options['payment_intent'],
+            ];
+        }
 
-    public function getAdditionalData(){}
+        $paymentIntent = $this->gateway->fetchPaymentIntent($intentData);
+        $response = $paymentIntent->send();
+
+        if ($response->requiresConfirmation()) {
+            $confirmResponse = $this->gateway->confirm($intentData)->send();
+            if ($confirmResponse->isSuccessful()) {
+                $response = $this->gateway->capture($intentData)->send();
+            }
+        } else {
+            $response = $this->gateway->capture($intentData)->send();
+        }
+
+        return $response;
+    }
+
+    public function getAdditionalData($response){
+
+        $additionalData['payment_intent'] = $response->getPaymentIntentReference();
+        return $additionalData;
+    }
 
     public function storeAdditionalData()
     {
-        return false;
+        return true;
     }
 
     public function refundTransaction($order, $refund_amount, $refund_application_fee)
