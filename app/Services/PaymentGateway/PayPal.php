@@ -26,7 +26,10 @@ class PayPal
             'event_id' => $event->id,
             'is_payment_successful' => 1,
         ]);
-        Log::info("returnUrl == " . print_r($returnUrl, true) . "\n");
+        $cancelUrl = route('showEventCheckoutPaymentReturn', [
+            'event_id' => $event->id,
+            'is_payment_successful' => 0,
+        ]);
 
         $this->transaction_data = [
             'amount' => $order_total,
@@ -34,7 +37,7 @@ class PayPal
             'description' => 'Order for customer: ' . $order_email,
             'receipt_email' => $order_email,
             'returnUrl' => $returnUrl,
-            'cancelUrl' => '',
+            'cancelUrl' => $cancelUrl,
             'confirm' => true
         ];
 
