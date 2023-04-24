@@ -84,7 +84,7 @@ class UserSignupController extends Controller
         $payment_gateway_data = [
             'payment_gateway_id' => PaymentGateway::getDefaultPaymentGatewayId(),
             'account_id' => $account->id,
-            'config' => '{"clientId":"","secret":"","testMode":"true"}',
+            'config' => '{"clientId":"","secret":"","testMode":true}',
         ];
         $paymentGateway = AccountPaymentGateway::create($payment_gateway_data);
 
