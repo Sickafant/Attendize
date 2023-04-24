@@ -453,7 +453,7 @@ class EventCheckoutController extends Controller
                     $return['redirectData'] = $response->getRedirectData();
                 }
 
-                return response()->json($return);
+                return  redirect()->away($response->getRedirectUrl());
 
             } elseif ($response->isSuccessful()) {
 
