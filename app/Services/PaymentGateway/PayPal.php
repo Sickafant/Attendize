@@ -80,25 +80,37 @@ class PayPal
                 'paymentIntentReference' => $this->options['payment_intent'],
             ];
         }
+        if ($response->isRedirect()) {
 
-        $paymentIntent = $this->gateway->fetchPaymentIntent($intentData);
-        $response = $paymentIntent->send();
+            session()->push('ticket_order_' . $event_id . '.transaction_data',
+                            $gateway->getTransactionData() + $data);
 
-        if ($response->requiresConfirmation()) {
-            $confirmResponse = $this->gateway->confirm($intentData)->send();
-            if ($confirmResponse->isSuccessful()) {
-                $response = $this->gateway->capture($intentData)->send();
+            Log::info("Redirect url: " . $response->getRedirectUrl());
+
+            $return = [
+                'status'       => 'success',
+                'redirectUrl'  => $response->getRedirectUrl(),
+                'message'      => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name
+            ];
+
+            // GET method requests should not have redirectData on the JSON return string
+            if($response->getRedirectMethod() == 'POST') {
+                $return['redirectData'] = $response->getRedirectData();
             }
-        } else {
-            $response = $this->gateway->capture($intentData)->send();
-        }
 
-        return $response;
+            return response()->json($return);
+        } else {
+            // display error to customer
+            return response()->json([
+                'status'  => 'error',
+                'message' => $response->getMessage(),
+            ]);
+        }
     }
 
     public function getAdditionalData($response){
 
-        $additionalData['payment_intent'] = $response->getPaymentIntentReference();
+        $additionalData['extra'] = 'nothing yet';
         return $additionalData;
     }
 
