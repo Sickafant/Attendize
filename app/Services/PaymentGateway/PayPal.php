@@ -1,6 +1,7 @@
 <?php
 
 namespace Services\PaymentGateway;
+use Log;
 
 class PayPal
 {
@@ -45,6 +46,8 @@ class PayPal
         $this->createTransactionData($order_total, $order_email, $event);
         $transaction = $this->gateway->purchase($this->transaction_data);
         $response = $transaction->send();
+        $data = $response->getData();
+        Log::info("Gateway purchase response data == " . print_r($data, true) . "\n");
 
         return $response;
     }
