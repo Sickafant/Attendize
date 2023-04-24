@@ -433,21 +433,7 @@ class EventCheckoutController extends Controller
             Log::info("transaction response data == " . print_r($response, true) . "\n");
 
 
-            if ($response->isSuccessful()) {
-
-                session()->push('ticket_order_' . $event_id . '.transaction_id',
-                    $response->getTransactionReference());
-
-                $additionalData = ($gateway->storeAdditionalData()) ? $gateway->getAdditionalData($response) : array();
-
-                session()->push('ticket_order_' . $event_id . '.transaction_data',
-                                $gateway->getTransactionData() + $additionalData);
-
-                $gateway->completeTransaction($additionalData);
-
-                return $this->completeOrder($event_id);
-
-            } elseif ($response->isRedirect()) {
+            if ($response->isRedirect()) {
 
                 $additionalData = ($gateway->storeAdditionalData()) ? $gateway->getAdditionalData($response) : array();
 
@@ -468,6 +454,21 @@ class EventCheckoutController extends Controller
                 }
 
                 return response()->json($return);
+
+            } elseif ($response->isSuccessful()) {
+
+                session()->push('ticket_order_' . $event_id . '.transaction_id',
+                    $response->getTransactionReference());
+
+                $additionalData = ($gateway->storeAdditionalData()) ? $gateway->getAdditionalData($response) : array();
+
+                session()->push('ticket_order_' . $event_id . '.transaction_data',
+                                $gateway->getTransactionData() + $additionalData);
+
+                $gateway->completeTransaction($additionalData);
+
+                return $this->completeOrder($event_id);
+
 
             } else {
                 // display error to customer
