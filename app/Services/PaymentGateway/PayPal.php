@@ -26,6 +26,7 @@ class PayPal
             'event_id' => $event->id,
             'is_payment_successful' => 1,
         ]);
+        Log::info("returnUrl == " . print_r($returnUrl, true) . "\n");
 
         $this->transaction_data = [
             'amount' => $order_total,
