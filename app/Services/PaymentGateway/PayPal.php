@@ -12,7 +12,7 @@ class PayPal
 
     private $gateway;
 
-    private $extra_params = ['paypalToken'];
+    private $extra_params = ['paypalToken','payKey'];
 
     public function __construct($gateway)
     {
