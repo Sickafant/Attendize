@@ -70,39 +70,34 @@ class PayPal
         }
     }
 
-    public function completeTransaction($data) {
+    public function completeTransaction($data)
+    {
 
-        if ($response->isRedirect()) {
+        // Once the transaction has been approved, we need to complete it.
+        $transaction = $this->$gateway->completePurchase(array(
+            'payer_id'             => $data['payerId'],
+            'transactionReference' => $data['eventId'],
+        ));
 
-            session()->push('ticket_order_' . $event_id . '.transaction_data',
-                            $gateway->getTransactionData() + $data);
+        $response = $transaction->send();
 
-            Log::info("Redirect url: " . $response->getRedirectUrl());
-
-            $return = [
-                'status'       => 'success',
-                'redirectUrl'  => $response->getRedirectUrl(),
-                'message'      => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name
-            ];
-
-            // GET method requests should not have redirectData on the JSON return string
-            if($response->getRedirectMethod() == 'POST') {
-                $return['redirectData'] = $response->getRedirectData();
-            }
-
-            return response()->json($return);
+        if ($response->isSuccessful()) {
+            // The customer has successfully paid.
+            Log::info("success response to transaction send == " . print_r($response, true) . "\n");
         } else {
-            // display error to customer
-            return response()->json([
-                'status'  => 'error',
-                'message' => $response->getMessage(),
-            ]);
+            // There was an error returned by completePurchase().  You should
+            // check the error code and message from PayPal, which may be something
+            // like "card declined", etc.
+            Log::error("response to transaction send == " . print_r($response, true) . "\n");
         }
     }
 
-    public function getAdditionalData($response){
 
-        $additionalData['extra'] = 'nothing yet';
+    public function getAdditionalData($response)
+    {
+
+        Log::info("response to get additional data from == " . print_r($response, true) . "\n");
+        $additionalData['payerId'] = $response->getPayerId();
         return $additionalData;
     }
 
