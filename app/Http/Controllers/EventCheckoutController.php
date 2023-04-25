@@ -504,7 +504,7 @@ class EventCheckoutController extends Controller
 
         $ticket_order = session()->get('ticket_order_' . $event_id);
 
-        Log::info("showEventCheckoutPaymentReturn: request order data == " . print_r($request, true) . "\n");
+        Log::info("showEventCheckoutPaymentReturn: request order data == " . print_r($request.json(), true) . "\n");
 
         $payment_gateway_config = $ticket_order['account_payment_gateway']->config + [
                 'testMode' => config('attendize.enable_test_payments')];
