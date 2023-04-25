@@ -78,7 +78,7 @@ class PayPal
     public function completeTransaction($data)
     {
         $paymentId = $_GET['paymentId'];
-        $payerId = $_GET['payerId'];
+        $payerId = $_GET['PayerID'];
         // Once the transaction has been approved, we need to complete it.
         $transaction = $this->gateway->completePurchase(array(
             'payer_id'             => $payerId ? $payerId : $this->options['PayerID'],
