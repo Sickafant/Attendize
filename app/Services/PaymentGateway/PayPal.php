@@ -23,12 +23,16 @@ class PayPal
 
     private function createTransactionData($order_total, $order_email, $event)
     {
+
+        Log::info("createTransactionData: event data == " . print_r($event, true) . "\n");
         $returnUrl = route('showEventCheckoutPaymentReturn', [
             'event_id' => $event->id,
+            'txn_id' => $event->id,
             'is_payment_successful' => 1,
         ]);
         $cancelUrl = route('showEventCheckoutPaymentReturn', [
             'event_id' => $event->id,
+            'txn_id' => $event->id,
             'is_payment_successful' => 0,
         ]);
 
