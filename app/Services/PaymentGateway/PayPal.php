@@ -100,6 +100,7 @@ class PayPal
 
     public function getAdditionalData()
     {
+        return [];
     }
 
     public function storeAdditionalData()
