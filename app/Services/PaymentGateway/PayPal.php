@@ -77,11 +77,11 @@ class PayPal
 
     public function completeTransaction($data)
     {
-
+        Log::info("completeTransaction: data == " . print_r($data, true) . "\n");
         // Once the transaction has been approved, we need to complete it.
         $transaction = $this->gateway->completePurchase(array(
-            'payer_id'             => $data['payerId'],
-            'transactionReference' => $data['eventId'],
+            'payer_id'             => $this->options['payerId'],
+            'transactionReference' => $this->options['paymentId'],
         ));
 
         $response = $transaction->send();
