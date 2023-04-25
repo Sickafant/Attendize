@@ -98,12 +98,8 @@ class PayPal
     }
 
 
-    public function getAdditionalData($response)
+    public function getAdditionalData()
     {
-
-        Log::info("response to get additional data from == " . print_r($response, true) . "\n");
-        $additionalData['payerId'] = $response->getPayerId();
-        return $additionalData;
     }
 
     public function storeAdditionalData()
