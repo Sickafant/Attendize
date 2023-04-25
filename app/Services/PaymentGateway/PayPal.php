@@ -99,8 +99,9 @@ class PayPal
     }
 
 
-    public function getAdditionalData()
+    public function getAdditionalData($response)
     {
+        Log::info("getAdditionalData: retrievable data == " . print_r($response, true) . "\n");
         return [];
     }
 
