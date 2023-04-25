@@ -1,18 +1,19 @@
 <?php
 
 namespace Services\PaymentGateway;
+
 use Log;
 
 class PayPal
 {
 
-    CONST GATEWAY_NAME = 'PayPal_Rest';
+    const GATEWAY_NAME = 'PayPal_Rest';
 
     private $transaction_data;
 
     private $gateway;
 
-    private $extra_params = ['paypalToken','payKey'];
+    private $extra_params = ['paypalToken', 'payKey'];
 
     public function __construct($gateway)
     {
@@ -74,7 +75,7 @@ class PayPal
     {
 
         // Once the transaction has been approved, we need to complete it.
-        $transaction = $this->$gateway->completePurchase(array(
+        $transaction = $this->gateway->completePurchase(array(
             'payer_id'             => $data['payerId'],
             'transactionReference' => $data['eventId'],
         ));
