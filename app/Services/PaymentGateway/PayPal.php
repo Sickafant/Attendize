@@ -96,6 +96,7 @@ class PayPal
             // like "card declined", etc.
             Log::error("response to transaction send == " . print_r($response, true) . "\n");
         }
+        return $response;
     }
 
 
