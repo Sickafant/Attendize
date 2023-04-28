@@ -114,11 +114,13 @@ class PayPal
     public function refundTransaction($order, $refund_amount, $refund_application_fee)
     {
         Log::info("refundTransaction: order data == " . print_r($order, true) . "\n");
+        Log::info("refundTransaction: refund_amount data == " . print_r($refund_amount, true) . "\n");
+        Log::info("refundTransaction: refund_application_fee data == " . print_r($refund_application_fee, true) . "\n");
 
         $request = $this->gateway->refund([
             'currency' => $event->currency->code,
             'transactionReference' => $order->transaction_id,
-            'amount' => $refund_amount,
+            'amount' => number_format((float)$refund_amount, 2, '.', ''),
             'refundApplicationFee' => $refund_application_fee
         ]);
 
