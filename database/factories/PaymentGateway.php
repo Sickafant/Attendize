@@ -52,7 +52,7 @@ $factory->state(PaymentGateway::class, 'PayPal', [
     'provider_name' => 'PayPal_Rest',
     'provider_url' => 'https://www.paypal.com',
     'is_on_site' => 0,
-    'can_refund' => 0,
+    'can_refund' => 1,
     'name' => 'PayPal_Rest',
     'default' => 0,
     'admin_blade_template' => 'ManageAccount.Partials.PayPal',
